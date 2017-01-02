@@ -1,7 +1,8 @@
-package com.devsilo;
+package com.devsilo.service;
 
-import com.devsilo.streamng.MediaResource;
-import com.devsilo.videos.VideoResource;
+import com.devsilo.service.config.DevSiloConfiguration;
+import com.devsilo.service.resources.MediaResource;
+import com.devsilo.service.resources.VideoResource;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.DB;
 import com.mongodb.MongoClient;
@@ -41,10 +42,7 @@ public class DevSiloApplication extends Application<DevSiloConfiguration> {
     public void run(DevSiloConfiguration configuration, Environment environment) {
 
         ObjectMapper mapper = new ObjectMapper();
-
-        final MediaResource mediaResource = new MediaResource();
-        final VideoResource videoResource = new VideoResource(mapper);
-        environment.jersey().register(mediaResource);
-        environment.jersey().register(videoResource);
+        environment.jersey().register(new MediaResource());
+        environment.jersey().register(new VideoResource(mapper));
     }
 }

@@ -1,4 +1,6 @@
-package com.devsilo.streamng;
+package com.devsilo.service.resources;
+
+import com.devsilo.streamng.MediaStreamer;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.HttpHeaders;

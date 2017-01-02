@@ -1,4 +1,4 @@
-package com.devsilo;
+package com.devsilo.service.config;
 
 import io.dropwizard.Configuration;
 

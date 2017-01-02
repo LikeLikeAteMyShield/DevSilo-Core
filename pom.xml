@@ -54,7 +54,7 @@
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>com.devsilo.DevSiloApplication</mainClass>
+                                    <mainClass>com.devsilo.service.DevSiloApplication</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>

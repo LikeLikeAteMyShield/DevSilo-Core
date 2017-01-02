@@ -1,5 +1,6 @@
-package com.devsilo.videos;
+package com.devsilo.service.resources;
 
+import com.devsilo.domain.Video;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.ws.rs.GET;

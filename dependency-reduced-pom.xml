@@ -19,7 +19,7 @@
               <transformers>
                 <transformer />
                 <transformer>
-                  <mainClass>com.devsilo.DevSiloApplication</mainClass>
+                  <mainClass>com.devsilo.service.DevSiloApplication</mainClass>
                 </transformer>
               </transformers>
             </configuration>

@@ -1,4 +1,4 @@
-package com.devsilo.videos;
+package com.devsilo.domain;
 
 public class Video {
 
