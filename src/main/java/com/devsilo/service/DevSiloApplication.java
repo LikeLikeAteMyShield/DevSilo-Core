@@ -3,7 +3,6 @@ package com.devsilo.service;
 import com.devsilo.service.config.DevSiloConfiguration;
 import com.devsilo.service.resources.MediaResource;
 import com.devsilo.service.resources.VideoResource;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.DB;
 import com.mongodb.MongoClient;
 import io.dropwizard.Application;
@@ -41,8 +40,7 @@ public class DevSiloApplication extends Application<DevSiloConfiguration> {
 
     public void run(DevSiloConfiguration configuration, Environment environment) {
 
-        ObjectMapper mapper = new ObjectMapper();
         environment.jersey().register(new MediaResource());
-        environment.jersey().register(new VideoResource(mapper));
+        environment.jersey().register(new VideoResource());
     }
 }
