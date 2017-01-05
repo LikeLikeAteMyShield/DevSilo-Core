@@ -40,7 +40,7 @@ public class DevSiloApplication extends Application<DevSiloConfiguration> {
 
     public void run(DevSiloConfiguration configuration, Environment environment) {
 
-        environment.jersey().register(new MediaResource());
+        environment.jersey().register(new MediaResource(configuration.getVideoFilePath()));
         environment.jersey().register(new VideoResource());
     }
 }

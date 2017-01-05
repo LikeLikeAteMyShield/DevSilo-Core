@@ -1,7 +1,6 @@
 package com.devsilo.service.resources;
 
 import com.devsilo.streamng.MediaStreamer;
-
 import javax.ws.rs.*;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
@@ -12,14 +11,15 @@ import java.nio.channels.FileChannel;
 import java.nio.channels.WritableByteChannel;
 import java.util.Date;
 
-@Path("watch/{id}")
+@Path("watch/{filename}")
 public class MediaResource {
 
     final int chunk_size = 8192 * 8192;
     private File video;
+    private String videoFilepath;
 
-    public MediaResource() {
-
+    public MediaResource(String videoFilepath) {
+        this.videoFilepath = videoFilepath;
     }
 
     //Verify if the server supports range headers.
@@ -31,8 +31,8 @@ public class MediaResource {
 
     @GET
     @Produces("video/mp4")
-    public Response streamVideo(@PathParam("id") String id, @HeaderParam("Range") String range) throws Exception {
-        video = new File("/var/www/webdav/" + id);
+    public Response streamVideo(@PathParam("filename") String filename, @HeaderParam("Range") String range) throws Exception {
+        video = new File(videoFilepath + filename);
         return buildStream(video, range);
     }
 

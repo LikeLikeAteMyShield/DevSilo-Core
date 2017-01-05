@@ -1,7 +1,5 @@
 package com.devsilo.domain;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class Video {
 
     private long id;
