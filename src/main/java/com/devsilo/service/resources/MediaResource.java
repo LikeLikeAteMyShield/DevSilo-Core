@@ -16,7 +16,7 @@ public class MediaResource {
 
     final int chunk_size = 8192 * 8192;
     private File video;
-    private String videoFilepath;
+    private final String videoFilepath;
 
     public MediaResource(String videoFilepath) {
         this.videoFilepath = videoFilepath;

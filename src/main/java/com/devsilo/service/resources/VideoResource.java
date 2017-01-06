@@ -2,7 +2,9 @@ package com.devsilo.service.resources;
 
 import com.devsilo.api.VideoListResponse;
 import com.devsilo.api.VideoResponse;
+import com.devsilo.domain.Id;
 import com.devsilo.domain.Video;
+import com.devsilo.persistence.VideoDao;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -17,7 +19,11 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 public class VideoResource {
 
-    public VideoResource() {}
+    private final VideoDao videoDao;
+
+    public VideoResource(VideoDao videoDao) {
+        this.videoDao = videoDao;
+    }
 
     @GET
     public Response getAllVideos() {
@@ -34,9 +40,23 @@ public class VideoResource {
 
     @GET
     @Path("/{id}")
-    public Response getVideoById(@PathParam("id") long id) {
+    public Response getVideoById(@PathParam("id") long untrusted_id) {
 
-        Video video = new Video(id, "a", "b");
+        Id id;
+        Video video;
+
+        try {
+            id = new Id(untrusted_id);
+        } catch(Exception e) {
+            return Response.status(400).build();
+        }
+
+        try {
+            video = videoDao.getVideoById(id);
+        } catch(Exception e) {
+            return Response.status(404).build();
+        }
+
         VideoResponse response = new VideoResponse(video);
         return Response.ok(response).build();
     }
