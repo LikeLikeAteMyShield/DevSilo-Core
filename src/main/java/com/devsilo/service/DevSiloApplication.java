@@ -1,5 +1,6 @@
 package com.devsilo.service;
 
+import com.devsilo.persistence.DatabaseClient;
 import com.devsilo.persistence.VideoDao;
 import com.devsilo.service.config.DevSiloConfiguration;
 import com.devsilo.service.resources.MediaResource;
@@ -28,19 +29,13 @@ public class DevSiloApplication extends Application<DevSiloConfiguration> {
 
     public void initialize(Bootstrap<DevSiloConfiguration> bootstrap) {
 
-        try {
-            MongoClient mongoClient = new MongoClient("localhost", 27017);
-
-            DB db = mongoClient.getDB("test");
-            System.out.println("Connected to DB successfully");
-        } catch (Exception e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-        }
     }
 
     public void run(DevSiloConfiguration configuration, Environment environment) {
 
-        VideoDao videoDao = new VideoDao();
+        MongoClient client = DatabaseClient.getClient();
+
+        VideoDao videoDao = new VideoDao(client);
 
         environment.jersey().register(new MediaResource(configuration.getVideoFilePath()));
         environment.jersey().register(new VideoResource(videoDao));

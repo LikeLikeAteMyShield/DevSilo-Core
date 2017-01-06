@@ -5,12 +5,15 @@ import com.devsilo.api.VideoResponse;
 import com.devsilo.domain.Id;
 import com.devsilo.domain.Video;
 import com.devsilo.persistence.VideoDao;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.jaxrs.annotation.JacksonFeatures;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.NoContentException;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,15 +29,12 @@ public class VideoResource {
     }
 
     @GET
+    @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
     public Response getAllVideos() {
 
-        Video v1 = new Video(1, "a", "b");
-        Video v2 = new Video(2, "c", "d");
-        List<Video> videos = new ArrayList<Video>();
-        videos.add(v1);
-        videos.add(v2);
-
+        List<Video> videos = videoDao.getAllVideos();
         VideoListResponse response = new VideoListResponse(videos);
+
         return Response.ok(response).build();
     }
 
@@ -53,7 +53,7 @@ public class VideoResource {
 
         try {
             video = videoDao.getVideoById(id);
-        } catch(Exception e) {
+        } catch(NoContentException e) {
             return Response.status(404).build();
         }
 

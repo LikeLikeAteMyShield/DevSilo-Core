@@ -2,22 +2,22 @@ package com.devsilo.domain;
 
 public class Video {
 
-    private long id;
-    private String name;
+    private Id id;
+    private String title;
     private String filename;
 
-    public Video(long id, String name, String filename) {
+    public Video(Id id, String title, String filename) {
         this.id = id;
-        this.name = name;
+        this.title = title;
         this.filename = filename;
     }
 
-    public long getId() {
+    public Id getId() {
         return this.id;
     }
 
-    public String getName() {
-        return this.name;
+    public String getTitle() {
+        return this.title;
     }
 
     public String getFilename() {
