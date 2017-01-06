@@ -1,7 +1,6 @@
 package com.devsilo.persistence;
 
 import com.mongodb.MongoClient;
-
 import java.net.UnknownHostException;
 
 public class DatabaseClient {

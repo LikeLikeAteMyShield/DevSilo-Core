@@ -7,7 +7,6 @@ import com.devsilo.domain.Video;
 import com.devsilo.persistence.VideoDao;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.jaxrs.annotation.JacksonFeatures;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -15,7 +14,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.NoContentException;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
 import java.util.List;
 
 @Path("videos")
@@ -48,13 +46,13 @@ public class VideoResource {
         try {
             id = new Id(untrusted_id);
         } catch(Exception e) {
-            return Response.status(400).build();
+            return Response.status(Response.Status.BAD_REQUEST).build();
         }
 
         try {
             video = videoDao.getVideoById(id);
         } catch(NoContentException e) {
-            return Response.status(404).build();
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
 
         VideoResponse response = new VideoResponse(video);

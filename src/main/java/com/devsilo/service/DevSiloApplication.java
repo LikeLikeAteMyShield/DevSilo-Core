@@ -5,7 +5,6 @@ import com.devsilo.persistence.VideoDao;
 import com.devsilo.service.config.DevSiloConfiguration;
 import com.devsilo.service.resources.MediaResource;
 import com.devsilo.service.resources.VideoResource;
-import com.mongodb.DB;
 import com.mongodb.MongoClient;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;

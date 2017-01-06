@@ -3,7 +3,6 @@ package com.devsilo.persistence;
 import com.devsilo.domain.Id;
 import com.devsilo.domain.Video;
 import com.mongodb.*;
-
 import javax.ws.rs.core.NoContentException;
 import java.util.ArrayList;
 import java.util.List;
