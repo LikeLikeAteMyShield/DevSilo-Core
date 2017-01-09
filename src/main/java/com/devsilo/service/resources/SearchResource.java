@@ -15,6 +15,6 @@ public class SearchResource {
     @GET
     public Response searchVideos(@QueryParam("searchPhrase") String searchPhrase) {
 
-        return Response.ok().build();
+        return Response.ok(searchPhrase).build();
     }
 }

@@ -4,6 +4,7 @@ import com.devsilo.persistence.DatabaseClient;
 import com.devsilo.persistence.VideoDao;
 import com.devsilo.service.config.DevSiloConfiguration;
 import com.devsilo.service.resources.MediaResource;
+import com.devsilo.service.resources.SearchResource;
 import com.devsilo.service.resources.VideoResource;
 import com.mongodb.MongoClient;
 import io.dropwizard.Application;
@@ -38,5 +39,6 @@ public class DevSiloApplication extends Application<DevSiloConfiguration> {
 
         environment.jersey().register(new MediaResource(configuration.getVideoFilePath()));
         environment.jersey().register(new VideoResource(videoDao));
+        environment.jersey().register(new SearchResource());
     }
 }
