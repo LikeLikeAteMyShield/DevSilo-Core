@@ -25,18 +25,8 @@ public class VideoDao {
         DBCursor cursor = col.find();
 
         while(cursor.hasNext()) {
-            BasicDBObject video = (BasicDBObject) cursor.next();
-            Id id = null;
-            try {
-                id = new Id(video.getLong("_id"));
-            } catch(Exception e){
-                e.printStackTrace();
-            }
-
-            String title = video.getString("title");
-            String filename = video.getString("filename");
-
-            videos.add(new Video(id, title, filename));
+            Video video = mapVideo((BasicDBObject)cursor.next());
+            videos.add(video);
         }
 
         return videos;
@@ -47,19 +37,45 @@ public class VideoDao {
         DBCollection col = db.getCollection("videos");
         DBObject query = new BasicDBObject("_id", id.getValue());
         DBCursor cursor = col.find(query);
-        DBObject result;
+        Video video;
 
         if(cursor.hasNext()) {
-            result = cursor.next();
+            video = mapVideo((BasicDBObject) cursor.next());
         } else {
             throw new NoContentException("video not found");
         }
 
-        String title = (String)result.get("title");
-        String filename = (String)result.get("filename");
-
-        Video video = new Video(id, title, filename);
-
         return video;
+    }
+
+    public List<Video> findVideosByName(String searchPhrase) {
+
+        List<Video> videos = new ArrayList<Video>();
+
+        DBCollection col = db.getCollection("videos");
+        DBObject searchQuery = new BasicDBObject("$text", new BasicDBObject("$search", searchPhrase));
+        DBCursor cursor = col.find(new BasicDBObject("title", searchQuery));
+
+        while(cursor.hasNext()) {
+            Video video = mapVideo((BasicDBObject)cursor.next());
+            videos.add(video);
+        }
+
+        return videos;
+    }
+
+    private Video mapVideo(BasicDBObject object) {
+
+        Id id = null;
+        try {
+            id = new Id(object.getLong("_id"));
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        String title = object.getString("title");
+        String filename = object.getString("filename");
+
+        return new Video(id, title, filename);
     }
 }
