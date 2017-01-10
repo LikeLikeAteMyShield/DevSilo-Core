@@ -39,6 +39,6 @@ public class DevSiloApplication extends Application<DevSiloConfiguration> {
 
         environment.jersey().register(new MediaResource(configuration.getVideoFilePath()));
         environment.jersey().register(new VideoResource(videoDao));
-        environment.jersey().register(new SearchResource());
+        environment.jersey().register(new SearchResource(videoDao));
     }
 }

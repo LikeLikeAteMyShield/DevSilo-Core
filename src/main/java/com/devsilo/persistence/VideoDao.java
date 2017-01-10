@@ -2,6 +2,7 @@ package com.devsilo.persistence;
 
 import com.devsilo.domain.Id;
 import com.devsilo.domain.Video;
+import com.devsilo.domain.VideoSource;
 import com.mongodb.*;
 import javax.ws.rs.core.NoContentException;
 import java.util.ArrayList;
@@ -53,8 +54,8 @@ public class VideoDao {
         List<Video> videos = new ArrayList<Video>();
 
         DBCollection col = db.getCollection("videos");
-        DBObject searchQuery = new BasicDBObject("$text", new BasicDBObject("$search", searchPhrase));
-        DBCursor cursor = col.find(new BasicDBObject("title", searchQuery));
+        //DBObject searchQuery = new BasicDBObject("$text", new BasicDBObject("$search", searchPhrase));
+        DBCursor cursor = col.find(new BasicDBObject("$text", new BasicDBObject("$search", searchPhrase)));
 
         while(cursor.hasNext()) {
             Video video = mapVideo((BasicDBObject)cursor.next());
