@@ -4,11 +4,11 @@ public class Id {
 
     private final long value;
 
-    public Id(long untrusted_Id) throws Exception {
+    public Id(long untrusted_Id) throws IllegalArgumentException {
         if (untrusted_Id > 0) {
             this.value = untrusted_Id;
         } else {
-            throw new Exception("Id must be greater than zero");
+            throw new IllegalArgumentException("Id must be greater than zero");
         }
     }
 

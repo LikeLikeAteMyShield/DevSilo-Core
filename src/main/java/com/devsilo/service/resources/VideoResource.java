@@ -5,28 +5,31 @@ import com.devsilo.api.VideoResponse;
 import com.devsilo.domain.Id;
 import com.devsilo.domain.Video;
 import com.devsilo.persistence.VideoDao;
+import com.devsilo.streamng.StreamingService;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.jaxrs.annotation.JacksonFeatures;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.NoContentException;
 import javax.ws.rs.core.Response;
+import java.io.File;
 import java.util.List;
 
 @Path("videos")
-@Produces(MediaType.APPLICATION_JSON)
 public class VideoResource {
 
     private final VideoDao videoDao;
+    private final String videoFilepath;
 
-    public VideoResource(VideoDao videoDao) {
+    public VideoResource(VideoDao videoDao, String videoFilePath) {
+
         this.videoDao = videoDao;
+        this.videoFilepath = videoFilePath;
     }
 
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
     @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
     public Response getAllVideos() {
 
@@ -38,24 +41,78 @@ public class VideoResource {
 
     @GET
     @Path("/{id}")
-    public Response getVideoById(@PathParam("id") long untrusted_id) {
+    @Produces("video/mp4")
+    public Response streamVideo(@PathParam("id") long untrusted_id, @HeaderParam("Range") String range) throws Exception {
+
+        Video video;
+
+        try {
+            video = getVideo(untrusted_id);
+        } catch(Exception e) {
+            return getResponseForException(e);
+        }
+
+        File asset = new File(videoFilepath + video.getFilename());
+        return StreamingService.buildStream(asset, range);
+    }
+
+    @GET
+    @Path("/{id}/info")
+    @Produces(MediaType.APPLICATION_JSON)
+    @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
+    public Response getVideoInfo(@PathParam("id") long untrusted_id) {
+
+        Video video;
+
+        try {
+            video = getVideo(untrusted_id);
+        } catch(Exception e) {
+            return getResponseForException(e);
+        }
+
+        VideoResponse response = new VideoResponse(video);
+        return Response.ok(response).build();
+    }
+
+    @GET
+    @Path("/{id}/view")
+    @Produces(MediaType.TEXT_HTML)
+    public Response getViewForVideo(@PathParam("id") long untrusted_id) {
+
+        //change return type to VideoView
+        //create video view object
+        //return it
+
+        return Response.ok().build();
+    }
+
+    private Video getVideo(long untrusted_id) throws Exception {
 
         Id id;
         Video video;
 
         try {
             id = new Id(untrusted_id);
-        } catch(Exception e) {
-            return Response.status(Response.Status.BAD_REQUEST).build();
+        } catch (IllegalArgumentException e) {
+            throw e;
         }
 
         try {
             video = videoDao.getVideoById(id);
-        } catch(NoContentException e) {
-            return Response.status(Response.Status.NOT_FOUND).build();
+        } catch (NoContentException e) {
+            throw e;
         }
 
-        VideoResponse response = new VideoResponse(video);
-        return Response.ok(response).build();
+        return video;
+    }
+
+    private Response getResponseForException(Exception e) {
+        if(e instanceof IllegalArgumentException) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        } else if(e instanceof NoContentException) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        } else {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
     }
 }

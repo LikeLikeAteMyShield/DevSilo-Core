@@ -1,7 +1,6 @@
-package com.devsilo.service.resources;
+package com.devsilo.streamng;
 
-import com.devsilo.streamng.MediaStreamer;
-import javax.ws.rs.*;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.StreamingOutput;
@@ -11,32 +10,11 @@ import java.nio.channels.FileChannel;
 import java.nio.channels.WritableByteChannel;
 import java.util.Date;
 
-@Path("watch/{filename}")
-public class MediaResource {
+public class StreamingService {
 
-    final int chunk_size = 8192 * 8192;
-    private File video;
-    private final String videoFilepath;
+    static final int chunk_size = 8192 * 8192;
 
-    public MediaResource(String videoFilepath) {
-        this.videoFilepath = videoFilepath;
-    }
-
-    //Verify if the server supports range headers.
-    @HEAD
-    @Produces("video/mp4")
-    public Response header() {
-        return Response.ok().status(206).header(HttpHeaders.CONTENT_LENGTH, video.length()).build();
-    }
-
-    @GET
-    @Produces("video/mp4")
-    public Response streamVideo(@PathParam("filename") String filename, @HeaderParam("Range") String range) throws Exception {
-        video = new File(videoFilepath + filename);
-        return buildStream(video, range);
-    }
-
-    private Response buildStream(final File asset, final String range) throws Exception {
+    public static Response buildStream(final File asset, final String range) throws Exception {
         // range not requested : Firefox, Opera, IE do not send range headers
         if (range == null) {
             StreamingOutput streamer = new StreamingOutput() {

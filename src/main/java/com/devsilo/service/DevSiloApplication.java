@@ -3,7 +3,6 @@ package com.devsilo.service;
 import com.devsilo.persistence.DatabaseClient;
 import com.devsilo.persistence.VideoDao;
 import com.devsilo.service.config.DevSiloConfiguration;
-import com.devsilo.service.resources.MediaResource;
 import com.devsilo.service.resources.SearchResource;
 import com.devsilo.service.resources.VideoResource;
 import com.mongodb.MongoClient;
@@ -37,8 +36,7 @@ public class DevSiloApplication extends Application<DevSiloConfiguration> {
 
         VideoDao videoDao = new VideoDao(client);
 
-        environment.jersey().register(new MediaResource(configuration.getVideoFilePath()));
-        environment.jersey().register(new VideoResource(videoDao));
+        environment.jersey().register(new VideoResource(videoDao, configuration.getVideoFilePath()));
         environment.jersey().register(new SearchResource(videoDao));
     }
 }
