@@ -18,7 +18,7 @@ public class VideoDao {
     public VideoDao(MongoClient client, DevSiloConfiguration configuration){
         this.client = client;
         this.configuration = configuration;
-        this.db = client.getDB("test");
+        this.db = client.getDB("devsilo");
     }
 
     public List<Video> getAllVideos() {
@@ -57,7 +57,6 @@ public class VideoDao {
         List<Video> videos = new ArrayList<Video>();
 
         DBCollection col = db.getCollection("videos");
-        //DBObject searchQuery = new BasicDBObject("$text", new BasicDBObject("$search", searchPhrase));
         DBCursor cursor = col.find(new BasicDBObject("$text", new BasicDBObject("$search", searchPhrase)));
 
         while(cursor.hasNext()) {
