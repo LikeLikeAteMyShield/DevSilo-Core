@@ -9,6 +9,7 @@ import com.mongodb.MongoClient;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import io.dropwizard.views.ViewBundle;
 
 public class DevSiloApplication extends Application<DevSiloConfiguration> {
 
@@ -27,16 +28,16 @@ public class DevSiloApplication extends Application<DevSiloConfiguration> {
     }
 
     public void initialize(Bootstrap<DevSiloConfiguration> bootstrap) {
-
+        bootstrap.addBundle(new ViewBundle());
     }
 
     public void run(DevSiloConfiguration configuration, Environment environment) {
 
         MongoClient client = DatabaseClient.getClient();
 
-        VideoDao videoDao = new VideoDao(client);
+        VideoDao videoDao = new VideoDao(client, configuration);
 
-        environment.jersey().register(new VideoResource(videoDao, configuration.getVideoFilePath()));
+        environment.jersey().register(new VideoResource(videoDao));
         environment.jersey().register(new SearchResource(videoDao));
     }
 }

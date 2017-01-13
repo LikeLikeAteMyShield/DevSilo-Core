@@ -3,6 +3,7 @@ package com.devsilo.persistence;
 import com.devsilo.domain.Id;
 import com.devsilo.domain.Video;
 import com.devsilo.domain.VideoSource;
+import com.devsilo.service.config.DevSiloConfiguration;
 import com.mongodb.*;
 import javax.ws.rs.core.NoContentException;
 import java.util.ArrayList;
@@ -11,10 +12,12 @@ import java.util.List;
 public class VideoDao {
 
     private MongoClient client;
+    private DevSiloConfiguration configuration;
     private DB db;
 
-    public VideoDao(MongoClient client){
+    public VideoDao(MongoClient client, DevSiloConfiguration configuration){
         this.client = client;
+        this.configuration = configuration;
         this.db = client.getDB("test");
     }
 
@@ -75,8 +78,9 @@ public class VideoDao {
         }
 
         String title = object.getString("title");
-        String filename = object.getString("filename");
+        String filePath = configuration.getVideoFilePath() + object.getString("filename");
+        String thumbnailPath = configuration.getThumbnailFilePath() + object.getString("imageName");
 
-        return new Video(id, title, filename);
+        return new Video(id, title, filePath, thumbnailPath);
     }
 }

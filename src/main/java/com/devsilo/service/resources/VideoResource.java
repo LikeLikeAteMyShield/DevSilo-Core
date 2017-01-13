@@ -5,6 +5,7 @@ import com.devsilo.api.VideoResponse;
 import com.devsilo.domain.Id;
 import com.devsilo.domain.Video;
 import com.devsilo.persistence.VideoDao;
+import com.devsilo.service.views.VideoView;
 import com.devsilo.streamng.StreamingService;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.jaxrs.annotation.JacksonFeatures;
@@ -20,12 +21,10 @@ import java.util.List;
 public class VideoResource {
 
     private final VideoDao videoDao;
-    private final String videoFilepath;
 
-    public VideoResource(VideoDao videoDao, String videoFilePath) {
+    public VideoResource(VideoDao videoDao) {
 
         this.videoDao = videoDao;
-        this.videoFilepath = videoFilePath;
     }
 
     @GET
@@ -52,7 +51,7 @@ public class VideoResource {
             return getResponseForException(e);
         }
 
-        File asset = new File(videoFilepath + video.getFilename());
+        File asset = new File(video.getVideoFilePath());
         return StreamingService.buildStream(asset, range);
     }
 
@@ -77,13 +76,17 @@ public class VideoResource {
     @GET
     @Path("/{id}/view")
     @Produces(MediaType.TEXT_HTML)
-    public Response getViewForVideo(@PathParam("id") long untrusted_id) {
+    public VideoView getViewForVideo(@PathParam("id") long untrusted_id) {
 
-        //change return type to VideoView
-        //create video view object
-        //return it
+        Video video;
 
-        return Response.ok().build();
+        try {
+            video = getVideo(untrusted_id);
+        } catch (Exception e) {
+            video = null;
+        }
+
+        return new VideoView(video);
     }
 
     private Video getVideo(long untrusted_id) throws Exception {
