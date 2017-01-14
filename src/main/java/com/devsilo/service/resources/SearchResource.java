@@ -5,6 +5,8 @@ import com.devsilo.api.SearchResponse;
 import com.devsilo.domain.ExternalVideo;
 import com.devsilo.domain.Video;
 import com.devsilo.domain.VideoSource;
+import com.devsilo.integration.DailyMotionServiceClient;
+import com.devsilo.integration.VimeoServiceClient;
 import com.devsilo.integration.YouTubeServiceClient;
 import com.devsilo.persistence.VideoDao;
 import com.devsilo.service.config.DevSiloConfiguration;
@@ -34,9 +36,13 @@ public class SearchResource {
     public Response searchVideos(@QueryParam("searchPhrase") String searchPhrase) {
 
         YouTubeServiceClient client = new YouTubeServiceClient(conf);
+        VimeoServiceClient vClient = new VimeoServiceClient();
+        DailyMotionServiceClient dClient = new DailyMotionServiceClient();
 
         List<Video> localVideos = videoDao.findVideosByName(searchPhrase);
         List<ExternalVideo> externalVideos = client.query(searchPhrase);
+        externalVideos.addAll(dClient.query(searchPhrase));
+        vClient.query(searchPhrase);
 
         SearchResponse response = new SearchResponse(localVideos, externalVideos);
 

@@ -52,7 +52,6 @@ public class YouTubeServiceClient implements ExternalServiceClient {
             search.setMaxResults(NUMBER_OF_VIDEOS_RETURNED);
 
             SearchListResponse searchListResponse = search.execute();
-            //System.out.println(searchListResponse);
             List<SearchResult> searchResultList = searchListResponse.getItems();
 
             results = parse(searchResultList.iterator());
@@ -75,7 +74,6 @@ public class YouTubeServiceClient implements ExternalServiceClient {
 
         while (searchResultIterator.hasNext()) {
             SearchResult resultVideo = searchResultIterator.next();
-            System.out.println(resultVideo);
             ResourceId rId = resultVideo.getId();
             Thumbnail thumbnail = resultVideo.getSnippet().getThumbnails().getDefault();
 

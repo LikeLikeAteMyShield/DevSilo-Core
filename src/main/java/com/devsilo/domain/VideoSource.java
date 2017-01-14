@@ -2,7 +2,7 @@ package com.devsilo.domain;
 
 public enum VideoSource {
 
-    DEVSILO("devsilo"),
+    DAILYMOTION("dailymotion"),
     YOUTUBE("youtube"),
     VIMEO("vimeo");
 
