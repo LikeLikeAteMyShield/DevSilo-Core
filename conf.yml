@@ -1,6 +1,8 @@
 videoFilePath: /Users/Jonny/Desktop/
 thumbnailFilePath: /Users/Jonny/Desktop/
 
+youTubeApiKey: AIzaSyCU02TLxqh0CfwykGwxVwCeyWZhIn7OLC4
+
 server:
 #  softNofileLimit: 1000
 #  hardNofileLimit: 1000

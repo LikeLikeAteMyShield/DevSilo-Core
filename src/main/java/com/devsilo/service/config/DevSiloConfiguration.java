@@ -12,6 +12,9 @@ public class DevSiloConfiguration extends Configuration {
     @NotEmpty
     private String thumbnailFilePath;
 
+    @NotEmpty
+    private String youTubeApiKey;
+
     @JsonProperty
     public String getVideoFilePath() {
         return videoFilePath;
@@ -28,7 +31,11 @@ public class DevSiloConfiguration extends Configuration {
     }
 
     @JsonProperty
-    public void setThumbnailFilePath(String filePath) {
-        this.thumbnailFilePath = filePath;
-    }
+    public void setThumbnailFilePath(String filePath) { this.thumbnailFilePath = filePath; }
+
+    @JsonProperty
+    public String getYouTubeApiKey() { return youTubeApiKey; }
+
+    @JsonProperty
+    public void setYouTubeApiKey(String youTubeApiKey) { this.youTubeApiKey = youTubeApiKey; }
 }

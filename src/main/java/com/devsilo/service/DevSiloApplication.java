@@ -37,6 +37,6 @@ public class DevSiloApplication extends Application<DevSiloConfiguration> {
         VideoDao videoDao = new VideoDao(client, configuration);
 
         environment.jersey().register(new VideoResource(videoDao));
-        environment.jersey().register(new SearchResource(videoDao));
+        environment.jersey().register(new SearchResource(videoDao, configuration));
     }
 }
