@@ -9,7 +9,6 @@ import com.mongodb.MongoClient;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import io.dropwizard.views.ViewBundle;
 
 public class DevSiloApplication extends Application<DevSiloConfiguration> {
 
@@ -28,7 +27,7 @@ public class DevSiloApplication extends Application<DevSiloConfiguration> {
     }
 
     public void initialize(Bootstrap<DevSiloConfiguration> bootstrap) {
-        bootstrap.addBundle(new ViewBundle());
+
     }
 
     public void run(DevSiloConfiguration configuration, Environment environment) {

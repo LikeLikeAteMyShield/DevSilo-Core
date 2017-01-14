@@ -89,9 +89,6 @@
     <orderEntry type="library" name="Maven: io.dropwizard.metrics:metrics-healthchecks:3.1.2" level="project" />
     <orderEntry type="library" name="Maven: net.sourceforge.argparse4j:argparse4j:0.6.0" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty.toolchain.setuid:jetty-setuid-java:1.0.3" level="project" />
-    <orderEntry type="library" name="Maven: io.dropwizard:dropwizard-views:0.9.0" level="project" />
-    <orderEntry type="library" name="Maven: io.dropwizard:dropwizard-views-freemarker:0.9.0" level="project" />
-    <orderEntry type="library" name="Maven: org.freemarker:freemarker:2.3.23" level="project" />
     <orderEntry type="library" name="Maven: org.mongodb:mongo-java-driver:2.10.1" level="project" />
     <orderEntry type="library" name="Maven: com.google.apis:google-api-services-youtube:v3-rev180-1.22.0" level="project" />
     <orderEntry type="library" name="Maven: com.google.api-client:google-api-client:1.22.0" level="project" />
