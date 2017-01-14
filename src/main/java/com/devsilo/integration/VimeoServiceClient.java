@@ -38,6 +38,6 @@ public class VimeoServiceClient implements ExternalServiceClient {
 
 
 
-        return null;
+        return new ArrayList<ExternalVideo>();
     }
 }
