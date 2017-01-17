@@ -10,7 +10,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -20,13 +19,15 @@ public class DailyMotionServiceClient implements ExternalServiceClient {
 
     public List<ExternalVideo> query(String searchPhrase) {
 
-        HttpClient client = new DefaultHttpClient();
-        HttpGet request = new HttpGet("https://api.dailymotion.com/videos?fields=id%2Cthumbnail_url%2Ctitle%2Cowner.screenname&search=" + searchPhrase + "&limit=25");
-        String responseString = "";
-
         List<ExternalVideo> results = new ArrayList<ExternalVideo>();
 
         try {
+            HttpClient client = new DefaultHttpClient();
+            String url = "https://api.dailymotion.com/videos?fields=id%2Cthumbnail_url%2Ctitle%2Cowner.screenname&search=" + searchPhrase + "&limit=25";
+            String requestUrl = url.replaceAll(" ","%20");
+            HttpGet request = new HttpGet(requestUrl);
+            String responseString = "";
+
             HttpResponse response = client.execute(request);
             InputStream content = response.getEntity().getContent();
 
@@ -48,7 +49,7 @@ public class DailyMotionServiceClient implements ExternalServiceClient {
                 ExternalVideo video = new ExternalVideo(uri, VideoSource.DAILYMOTION, title,"", author, thumbnail);
                 results.add(video);
             }
-        } catch(IOException e) {
+        } catch(Exception e) {
             e.printStackTrace();
         }
 

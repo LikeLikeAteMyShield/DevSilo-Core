@@ -4,6 +4,7 @@ import com.devsilo.domain.ExternalVideo;
 import com.devsilo.service.config.DevSiloConfiguration;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ClientManager {
@@ -37,6 +38,8 @@ public class ClientManager {
         for (ExternalServiceClient client : clients) {
             videos.addAll(client.query(searchPhrase));
         }
+
+        Collections.shuffle(videos);
 
         return videos;
     }
