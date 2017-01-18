@@ -17,8 +17,12 @@ import java.util.List;
 
 public class VimeoServiceClient implements ExternalServiceClient {
 
-    private static final String AUTH_TOKEN = "3a606a5ce0bf7dd879b9ec5c96b48c2a";
+    private final String AUTH_TOKEN;
     private static final String NUMBER_OF_VIDEOS_TO_RETURN = "25";
+
+    public VimeoServiceClient(String authToken) {
+        this.AUTH_TOKEN = authToken;
+    }
 
     public List<ExternalVideo> query(String searchPhrase) {
 

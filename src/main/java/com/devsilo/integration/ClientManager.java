@@ -14,7 +14,7 @@ public class ClientManager {
 
     private ClientManager(DevSiloConfiguration configuration) {
         YouTubeServiceClient youTubeServiceClient = new YouTubeServiceClient(configuration);
-        VimeoServiceClient vimeoServiceClient = new VimeoServiceClient();
+        VimeoServiceClient vimeoServiceClient = new VimeoServiceClient(configuration.getVimeoAuthToken());
         DailyMotionServiceClient dailyMotionServiceClient = new DailyMotionServiceClient();
 
         clients = new ArrayList<ExternalServiceClient>();

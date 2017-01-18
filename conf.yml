@@ -2,6 +2,7 @@ videoFilePath: /Users/Jonny/Desktop/
 thumbnailFilePath: /Users/Jonny/Desktop/
 
 youTubeApiKey: AIzaSyCU02TLxqh0CfwykGwxVwCeyWZhIn7OLC4
+vimeoAuthToken: 3a606a5ce0bf7dd879b9ec5c96b48c2a
 
 server:
 #  softNofileLimit: 1000

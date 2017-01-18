@@ -15,6 +15,9 @@ public class DevSiloConfiguration extends Configuration {
     @NotEmpty
     private String youTubeApiKey;
 
+    @NotEmpty
+    private String vimeoAuthToken;
+
     @JsonProperty
     public String getVideoFilePath() {
         return videoFilePath;
@@ -38,4 +41,12 @@ public class DevSiloConfiguration extends Configuration {
 
     @JsonProperty
     public void setYouTubeApiKey(String youTubeApiKey) { this.youTubeApiKey = youTubeApiKey; }
+
+    public String getVimeoAuthToken() {
+        return vimeoAuthToken;
+    }
+
+    public void setVimeoAuthToken(String vimeoAuthToken) {
+        this.vimeoAuthToken = vimeoAuthToken;
+    }
 }
