@@ -30,7 +30,9 @@ public class VimeoServiceClient implements ExternalServiceClient {
 
         try {
             HttpClient client = new DefaultHttpClient();
-            HttpGet request = new HttpGet("https://api.vimeo.com/videos?query=" + searchPhrase + "&per_page=" + NUMBER_OF_VIDEOS_TO_RETURN);
+            String urlString = "https://api.vimeo.com/videos?query=" + searchPhrase + "&per_page=" + NUMBER_OF_VIDEOS_TO_RETURN;
+            String sanitizedUrlString = urlString.replaceAll(" ", "+");
+            HttpGet request = new HttpGet(sanitizedUrlString);
             request.setHeader("Authorization", "Bearer " + AUTH_TOKEN);
 
             HttpResponse response = client.execute(request);
@@ -49,6 +51,7 @@ public class VimeoServiceClient implements ExternalServiceClient {
             for(int i=0 ; i<responseVideoArray.length() ; i++) {
                 JSONObject videoObject = responseVideoArray.getJSONObject(i);
                 String uri = videoObject.getString("uri");
+                String trimmedUri = uri.replace("/videos/", "");
                 String title = videoObject.getString("name");
                 JSONObject authorObject = videoObject.getJSONObject("user");
                 String author = authorObject.getString("name");
@@ -57,7 +60,7 @@ public class VimeoServiceClient implements ExternalServiceClient {
                 JSONObject firstThumbnailObject = thumbnailArray.getJSONObject(0);
                 String thumbnail =firstThumbnailObject.getString("link");
 
-                ExternalVideo video = new ExternalVideo(uri, VideoSource.VIMEO, title, "", author, thumbnail);
+                ExternalVideo video = new ExternalVideo(trimmedUri, VideoSource.VIMEO, title, "", author, thumbnail);
                 videos.add(video);
             }
 
