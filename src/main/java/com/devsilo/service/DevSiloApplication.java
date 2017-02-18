@@ -23,6 +23,8 @@ public class DevSiloApplication extends Application<DevSiloConfiguration> {
         System.out.println("██████╔╝███████╗ ╚████╔╝ ███████║██║███████╗╚██████╔╝");
         System.out.println("╚═════╝ ╚══════╝  ╚═══╝  ╚══════╝╚═╝╚══════╝ ╚═════╝");
         System.out.println();
+        System.out.println("--Now With Automated Deployment--");
+        System.out.println();
 
         new DevSiloApplication().run(args);
     }
