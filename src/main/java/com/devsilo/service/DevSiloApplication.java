@@ -1,10 +1,12 @@
 package com.devsilo.service;
 
 import com.devsilo.persistence.DatabaseClient;
+import com.devsilo.persistence.UserDao;
 import com.devsilo.persistence.VideoDao;
 import com.devsilo.service.config.DevSiloConfiguration;
 import com.devsilo.service.healthchecks.DatabaseHealthCheck;
 import com.devsilo.service.resources.SearchResource;
+import com.devsilo.service.resources.UserResource;
 import com.devsilo.service.resources.VideoResource;
 import com.mongodb.MongoClient;
 import io.dropwizard.Application;
@@ -38,9 +40,11 @@ public class DevSiloApplication extends Application<DevSiloConfiguration> {
         MongoClient client = DatabaseClient.getClient();
 
         VideoDao videoDao = new VideoDao(client, configuration);
+        UserDao userDao = new UserDao(client, configuration);
 
         environment.jersey().register(new VideoResource(videoDao));
         environment.jersey().register(new SearchResource(videoDao, configuration));
+        environment.jersey().register(new UserResource(userDao));
 
         environment.healthChecks().register("database", new DatabaseHealthCheck(client));
     }
