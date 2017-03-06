@@ -12,6 +12,7 @@ import com.mongodb.MongoClient;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
 
 public class DevSiloApplication extends Application<DevSiloConfiguration> {
 
@@ -42,7 +43,9 @@ public class DevSiloApplication extends Application<DevSiloConfiguration> {
         VideoDao videoDao = new VideoDao(client, configuration);
         UserDao userDao = new UserDao(client, configuration);
 
-        environment.jersey().register(new VideoResource(videoDao));
+        environment.jersey().register(MultiPartFeature.class);
+
+        environment.jersey().register(new VideoResource(videoDao, configuration));
         environment.jersey().register(new SearchResource(videoDao, configuration));
         environment.jersey().register(new UserResource(userDao));
 

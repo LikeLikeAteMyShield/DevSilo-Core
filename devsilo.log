@@ -1,0 +1,124 @@
+[33m
+██████╗ ███████╗██╗   ██╗███████╗██╗██╗      ██████╗
+██╔══██╗██╔════╝██║   ██║██╔════╝██║██║     ██╔═══██╗
+██║  ██║█████╗  ██║   ██║███████╗██║██║     ██║   ██║
+██║  ██║██╔══╝  ╚██╗ ██╔╝╚════██║██║██║     ██║   ██║
+██████╔╝███████╗ ╚████╔╝ ███████║██║███████╗╚██████╔╝
+╚═════╝ ╚══════╝  ╚═══╝  ╚══════╝╚═╝╚══════╝ ╚═════╝
+
+--Now With Automated Deployment--
+
+INFO  [2017-03-06 18:24:12,258] org.eclipse.jetty.util.log: Logging initialized @864ms
+INFO  [2017-03-06 18:24:12,359] io.dropwizard.server.ServerFactory: Starting DevSiloApplication
+INFO  [2017-03-06 18:24:12,364] io.dropwizard.server.DefaultServerFactory: Registering jersey handler with root path prefix: /
+INFO  [2017-03-06 18:24:12,375] io.dropwizard.server.DefaultServerFactory: Registering admin handler with root path prefix: /
+INFO  [2017-03-06 18:24:12,424] org.eclipse.jetty.setuid.SetUIDListener: Opened application@4a3329b9{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2017-03-06 18:24:12,424] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@3dddefd8{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2017-03-06 18:24:12,426] org.eclipse.jetty.server.Server: jetty-9.2.z-SNAPSHOT
+INFO  [2017-03-06 18:24:12,830] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /search (com.devsilo.service.resources.SearchResource)
+    POST    /users (com.devsilo.service.resources.UserResource)
+    GET     /videos (com.devsilo.service.resources.VideoResource)
+    POST    /videos (com.devsilo.service.resources.VideoResource)
+    GET     /videos/{id} (com.devsilo.service.resources.VideoResource)
+    GET     /videos/{id}/info (com.devsilo.service.resources.VideoResource)
+
+INFO  [2017-03-06 18:24:12,833] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@5a6482a9{/,null,AVAILABLE}
+INFO  [2017-03-06 18:24:12,836] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2017-03-06 18:24:12,839] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@5b12012e{/,null,AVAILABLE}
+INFO  [2017-03-06 18:24:12,846] org.eclipse.jetty.server.ServerConnector: Started application@4a3329b9{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2017-03-06 18:24:12,847] org.eclipse.jetty.server.ServerConnector: Started admin@3dddefd8{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2017-03-06 18:24:12,847] org.eclipse.jetty.server.Server: Started @1454ms
+0:0:0:0:0:0:0:1 - - [06/Mar/2017:18:24:24 +0000] "POST /videos HTTP/1.1" 200 26 "-" "PostmanRuntime/3.0.9" 352
+INFO  [2017-03-06 18:24:31,696] org.eclipse.jetty.server.ServerConnector: Stopped application@4a3329b9{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2017-03-06 18:24:31,698] org.eclipse.jetty.server.ServerConnector: Stopped admin@3dddefd8{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2017-03-06 18:24:31,699] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@5b12012e{/,null,UNAVAILABLE}
+INFO  [2017-03-06 18:24:31,701] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@5a6482a9{/,null,UNAVAILABLE}
+[33m
+██████╗ ███████╗██╗   ██╗███████╗██╗██╗      ██████╗
+██╔══██╗██╔════╝██║   ██║██╔════╝██║██║     ██╔═══██╗
+██║  ██║█████╗  ██║   ██║███████╗██║██║     ██║   ██║
+██║  ██║██╔══╝  ╚██╗ ██╔╝╚════██║██║██║     ██║   ██║
+██████╔╝███████╗ ╚████╔╝ ███████║██║███████╗╚██████╔╝
+╚═════╝ ╚══════╝  ╚═══╝  ╚══════╝╚═╝╚══════╝ ╚═════╝
+
+--Now With Automated Deployment--
+
+INFO  [2017-03-06 18:26:07,855] org.eclipse.jetty.util.log: Logging initialized @860ms
+INFO  [2017-03-06 18:26:08,230] io.dropwizard.server.ServerFactory: Starting DevSiloApplication
+INFO  [2017-03-06 18:26:08,235] io.dropwizard.server.DefaultServerFactory: Registering jersey handler with root path prefix: /
+INFO  [2017-03-06 18:26:08,246] io.dropwizard.server.DefaultServerFactory: Registering admin handler with root path prefix: /
+INFO  [2017-03-06 18:26:08,296] org.eclipse.jetty.setuid.SetUIDListener: Opened application@4a3329b9{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2017-03-06 18:26:08,297] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@3dddefd8{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2017-03-06 18:26:08,299] org.eclipse.jetty.server.Server: jetty-9.2.z-SNAPSHOT
+INFO  [2017-03-06 18:26:08,711] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /search (com.devsilo.service.resources.SearchResource)
+    POST    /users (com.devsilo.service.resources.UserResource)
+    GET     /videos (com.devsilo.service.resources.VideoResource)
+    POST    /videos (com.devsilo.service.resources.VideoResource)
+    GET     /videos/{id} (com.devsilo.service.resources.VideoResource)
+    GET     /videos/{id}/info (com.devsilo.service.resources.VideoResource)
+
+INFO  [2017-03-06 18:26:08,713] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@5a6482a9{/,null,AVAILABLE}
+INFO  [2017-03-06 18:26:08,717] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2017-03-06 18:26:08,720] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@5b12012e{/,null,AVAILABLE}
+INFO  [2017-03-06 18:26:08,726] org.eclipse.jetty.server.ServerConnector: Started application@4a3329b9{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2017-03-06 18:26:08,727] org.eclipse.jetty.server.ServerConnector: Started admin@3dddefd8{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2017-03-06 18:26:08,727] org.eclipse.jetty.server.Server: Started @1733ms
+0:0:0:0:0:0:0:1 - - [06/Mar/2017:18:26:19 +0000] "POST /videos HTTP/1.1" 200 26 "-" "PostmanRuntime/3.0.9" 371
+INFO  [2017-03-06 18:26:27,365] org.eclipse.jetty.server.ServerConnector: Stopped application@4a3329b9{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2017-03-06 18:26:27,366] org.eclipse.jetty.server.ServerConnector: Stopped admin@3dddefd8{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2017-03-06 18:26:27,367] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@5b12012e{/,null,UNAVAILABLE}
+INFO  [2017-03-06 18:26:27,369] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@5a6482a9{/,null,UNAVAILABLE}
+[33m
+██████╗ ███████╗██╗   ██╗███████╗██╗██╗      ██████╗
+██╔══██╗██╔════╝██║   ██║██╔════╝██║██║     ██╔═══██╗
+██║  ██║█████╗  ██║   ██║███████╗██║██║     ██║   ██║
+██║  ██║██╔══╝  ╚██╗ ██╔╝╚════██║██║██║     ██║   ██║
+██████╔╝███████╗ ╚████╔╝ ███████║██║███████╗╚██████╔╝
+╚═════╝ ╚══════╝  ╚═══╝  ╚══════╝╚═╝╚══════╝ ╚═════╝
+
+--Now With Automated Deployment--
+
+INFO  [2017-03-06 18:30:11,469] org.eclipse.jetty.util.log: Logging initialized @859ms
+INFO  [2017-03-06 18:30:11,825] io.dropwizard.server.ServerFactory: Starting DevSiloApplication
+INFO  [2017-03-06 18:30:11,830] io.dropwizard.server.DefaultServerFactory: Registering jersey handler with root path prefix: /
+INFO  [2017-03-06 18:30:11,841] io.dropwizard.server.DefaultServerFactory: Registering admin handler with root path prefix: /
+INFO  [2017-03-06 18:30:11,894] org.eclipse.jetty.setuid.SetUIDListener: Opened application@4a3329b9{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2017-03-06 18:30:11,894] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@3dddefd8{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2017-03-06 18:30:11,897] org.eclipse.jetty.server.Server: jetty-9.2.z-SNAPSHOT
+INFO  [2017-03-06 18:30:12,318] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /search (com.devsilo.service.resources.SearchResource)
+    POST    /users (com.devsilo.service.resources.UserResource)
+    GET     /videos (com.devsilo.service.resources.VideoResource)
+    POST    /videos (com.devsilo.service.resources.VideoResource)
+    GET     /videos/{id} (com.devsilo.service.resources.VideoResource)
+    GET     /videos/{id}/info (com.devsilo.service.resources.VideoResource)
+
+INFO  [2017-03-06 18:30:12,320] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@5a6482a9{/,null,AVAILABLE}
+INFO  [2017-03-06 18:30:12,323] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2017-03-06 18:30:12,326] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@5b12012e{/,null,AVAILABLE}
+INFO  [2017-03-06 18:30:12,333] org.eclipse.jetty.server.ServerConnector: Started application@4a3329b9{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2017-03-06 18:30:12,334] org.eclipse.jetty.server.ServerConnector: Started admin@3dddefd8{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2017-03-06 18:30:12,334] org.eclipse.jetty.server.Server: Started @1725ms
+0:0:0:0:0:0:0:1 - - [06/Mar/2017:18:30:23 +0000] "POST /videos HTTP/1.1" 200 26 "-" "PostmanRuntime/3.0.9" 402
+0:0:0:0:0:0:0:1 - - [06/Mar/2017:18:32:42 +0000] "POST /videos HTTP/1.1" 200 26 "-" "PostmanRuntime/3.0.9" 320
+INFO  [2017-03-06 18:33:40,802] org.eclipse.jetty.server.ServerConnector: Stopped application@4a3329b9{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2017-03-06 18:33:40,803] org.eclipse.jetty.server.ServerConnector: Stopped admin@3dddefd8{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2017-03-06 18:33:40,804] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@5b12012e{/,null,UNAVAILABLE}
+INFO  [2017-03-06 18:33:40,806] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@5a6482a9{/,null,UNAVAILABLE}
