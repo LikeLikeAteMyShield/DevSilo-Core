@@ -67,6 +67,20 @@ public class VideoDao {
         return videos;
     }
 
+    public void addVideo(Video video) {
+
+        DBCollection col = db.getCollection("videos");
+
+        BasicDBObject videoObject = new BasicDBObject();
+        videoObject.put("_id", video.getId().getValue());
+        videoObject.put("title", video.getTitle());
+        videoObject.put("author", video.getAuthor());
+        videoObject.put("filename", video.theVideoFilePath());
+        videoObject.put("imageName", video.theThumbnailFilePath());
+
+        col.insert(videoObject);
+    }
+
     private Video mapVideo(BasicDBObject object) {
 
         Id id = null;
@@ -77,9 +91,10 @@ public class VideoDao {
         }
 
         String title = object.getString("title");
+        String author = object.getString("author");
         String filePath = configuration.getVideoFilePath() + object.getString("filename");
         String thumbnailPath = configuration.getThumbnailFilePath() + object.getString("imageName");
 
-        return new Video(id, title, filePath, thumbnailPath);
+        return new Video(id, title, author, filePath, thumbnailPath);
     }
 }

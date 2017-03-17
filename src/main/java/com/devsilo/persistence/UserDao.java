@@ -2,10 +2,10 @@ package com.devsilo.persistence;
 
 import com.devsilo.domain.User;
 import com.devsilo.service.config.DevSiloConfiguration;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.MongoClient;
+import com.mongodb.*;
+
+import javax.ws.rs.core.NoContentException;
+import java.util.UUID;
 
 public class UserDao {
 
@@ -28,5 +28,30 @@ public class UserDao {
         userObject.put("screenName", user.getScreenName());
 
         col.insert(userObject);
+    }
+
+    public User getUserById(String id) throws NoContentException {
+
+        DBCollection col = db.getCollection("users");
+        DBObject query = new BasicDBObject("_id", id);
+        DBCursor cursor = col.find(query);
+
+        User user;
+
+        if(cursor.hasNext()) {
+            user = mapUser((BasicDBObject) cursor.next());
+        } else {
+            throw new NoContentException("user not found");
+        }
+
+        return user;
+    }
+
+    private User mapUser(BasicDBObject object) {
+
+        UUID id = UUID.fromString(object.getString("_id"));
+        String screenName = object.getString("screenName");
+
+        return new User(id, screenName);
     }
 }

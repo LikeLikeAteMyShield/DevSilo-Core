@@ -11,13 +11,15 @@ public class Video {
 
     private Id id;
     private String title;
+    private String author;
     private String videoFilePath;
     private String thumbnailFilePath;
     private String thumbnailData;
 
-    public Video(Id id, String title, String videoFilePath, String thumbnailFilePath) {
+    public Video(Id id, String title, String author, String videoFilePath, String thumbnailFilePath) {
         this.id = id;
         this.title = title;
+        this.author = author;
         this.videoFilePath = videoFilePath;
         this.thumbnailFilePath = thumbnailFilePath;
     }
@@ -29,6 +31,8 @@ public class Video {
     public String getTitle() {
         return this.title;
     }
+
+    public String getAuthor() { return this.author; }
 
     public String theVideoFilePath() {
         return this.videoFilePath;

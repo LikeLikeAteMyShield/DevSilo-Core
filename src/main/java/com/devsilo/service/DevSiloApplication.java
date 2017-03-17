@@ -45,7 +45,7 @@ public class DevSiloApplication extends Application<DevSiloConfiguration> {
 
         environment.jersey().register(MultiPartFeature.class);
 
-        environment.jersey().register(new VideoResource(videoDao, configuration));
+        environment.jersey().register(new VideoResource(userDao, videoDao, configuration));
         environment.jersey().register(new SearchResource(videoDao, configuration));
         environment.jersey().register(new UserResource(userDao));
 
