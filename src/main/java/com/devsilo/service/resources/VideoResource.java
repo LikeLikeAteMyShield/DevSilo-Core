@@ -1,7 +1,9 @@
 package com.devsilo.service.resources;
 
+import com.devsilo.api.CommentsResponse;
 import com.devsilo.api.VideoListResponse;
 import com.devsilo.api.VideoResponse;
+import com.devsilo.domain.Comment;
 import com.devsilo.domain.Id;
 import com.devsilo.domain.User;
 import com.devsilo.domain.Video;
@@ -134,6 +136,54 @@ public class VideoResource {
         output = output + " - Thumbnail created";
 
         return Response.status(200).entity(output).build();
+    }
+
+    @GET
+    @Path("/{id}/comments")
+    @Produces(MediaType.APPLICATION_JSON)
+    @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
+    public Response getCommentsForVideo(@PathParam("id") long untrusted_id) {
+
+        Video video;
+
+        try {
+            video = getVideo(untrusted_id);
+        } catch(Exception e) {
+            return getResponseForException(e);
+        }
+
+        List<Comment> comments = videoDao.getCommentsForVideo(video);
+        CommentsResponse response = new CommentsResponse(comments);
+
+        return Response.status(200).entity(response).build();
+    }
+
+    @POST
+    @Path("/{id}/comments")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response addCommentForVideo(@PathParam("id") long untrusted_id, Comment comment) {
+
+        User user;
+
+        try {
+            user = userDao.getUserById(comment.getAuthor());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
+
+        Video video;
+
+        try {
+            video = getVideo(untrusted_id);
+        } catch(Exception e) {
+            return getResponseForException(e);
+        }
+
+        videoDao.addCommentForVideo(video, user.getScreenName(), comment.getContent());
+
+        return Response.status(200).build();
     }
 
     private void writeToFile(InputStream uploadedInputStream,

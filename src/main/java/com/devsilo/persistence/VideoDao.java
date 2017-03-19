@@ -1,8 +1,6 @@
 package com.devsilo.persistence;
 
-import com.devsilo.domain.Id;
-import com.devsilo.domain.Video;
-import com.devsilo.domain.VideoSource;
+import com.devsilo.domain.*;
 import com.devsilo.service.config.DevSiloConfiguration;
 import com.mongodb.*;
 import javax.ws.rs.core.NoContentException;
@@ -79,6 +77,44 @@ public class VideoDao {
         videoObject.put("imageName", video.theThumbnailFilePath());
 
         col.insert(videoObject);
+    }
+
+    public List<Comment> getCommentsForVideo(Video video) {
+
+        List<Comment> comments = new ArrayList<Comment>();
+
+        DBCollection col = db.getCollection("videos");
+
+        DBObject query = new BasicDBObject("_id", video.getId().getValue());
+        DBCursor cursor = col.find(query);
+
+        BasicDBObject object = new BasicDBObject();
+
+        while(cursor.hasNext()) {
+            object = (BasicDBObject) cursor.next();
+        }
+
+        List<BasicDBObject> commentObjects = (List<BasicDBObject>) object.get("comments");
+
+        for (BasicDBObject commentObject : commentObjects) {
+            Comment comment = new Comment(commentObject.getString("author"), commentObject.getString("content"));
+            comments.add(comment);
+        }
+
+        return comments;
+    }
+
+    public void addCommentForVideo(Video video, String author, String content) {
+
+        DBCollection col = db.getCollection("videos");
+
+        DBObject searchObject = new BasicDBObject("_id", video.getId().getValue());
+        DBObject modifiedObject = new BasicDBObject();
+
+        BasicDBObject commentObject = new BasicDBObject().append("author", author).append("content", content);
+        modifiedObject.put("$push", new BasicDBObject().append("comments", commentObject));
+
+        col.update(searchObject, modifiedObject);
     }
 
     private Video mapVideo(BasicDBObject object) {
