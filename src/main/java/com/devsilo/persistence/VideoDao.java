@@ -96,9 +96,11 @@ public class VideoDao {
 
         List<BasicDBObject> commentObjects = (List<BasicDBObject>) object.get("comments");
 
-        for (BasicDBObject commentObject : commentObjects) {
-            Comment comment = new Comment(commentObject.getString("author"), commentObject.getString("content"));
-            comments.add(comment);
+        if (commentObjects != null) {
+            for (BasicDBObject commentObject : commentObjects) {
+                Comment comment = new Comment(commentObject.getString("author"), commentObject.getString("content"));
+                comments.add(comment);
+            }
         }
 
         return comments;
