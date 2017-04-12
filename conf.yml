@@ -10,3 +10,13 @@ server:
   applicationConnectors:
     - type: http
       port: 8080
+
+logging:
+  level: INFO
+  appenders:
+    - type: file
+      currentLogFilename: /var/log/devsilo.log
+      threshold: ALL
+      archive: false
+      timeZone: UTC
+      logFormat: "%d %-5level [%thread] %logger : %msg%n"

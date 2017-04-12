@@ -57,7 +57,7 @@ public class VimeoServiceClient implements ExternalServiceClient {
                 String author = authorObject.getString("name");
                 JSONObject thumbnailObject = videoObject.getJSONObject("pictures");
                 JSONArray thumbnailArray = thumbnailObject.getJSONArray("sizes");
-                JSONObject firstThumbnailObject = thumbnailArray.getJSONObject(0);
+                JSONObject firstThumbnailObject = thumbnailArray.getJSONObject(1);
                 String thumbnail =firstThumbnailObject.getString("link");
 
                 ExternalVideo video = new ExternalVideo(trimmedUri, VideoSource.VIMEO, title, "", author, thumbnail);

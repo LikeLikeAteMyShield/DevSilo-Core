@@ -75,7 +75,7 @@ public class YouTubeServiceClient implements ExternalServiceClient {
         while (searchResultIterator.hasNext()) {
             SearchResult resultVideo = searchResultIterator.next();
             ResourceId rId = resultVideo.getId();
-            Thumbnail thumbnail = resultVideo.getSnippet().getThumbnails().getDefault();
+            Thumbnail thumbnail = resultVideo.getSnippet().getThumbnails().getMedium();
 
             ExternalVideo video = new ExternalVideo(rId.getVideoId(), VideoSource.YOUTUBE, resultVideo.getSnippet().getTitle(), resultVideo.getSnippet().getDescription(), resultVideo.getSnippet().getChannelTitle(), thumbnail.getUrl());
             videos.add(video);
